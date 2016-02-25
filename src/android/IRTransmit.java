@@ -107,7 +107,7 @@ public class IRTransmit extends CordovaPlugin {
                 for (int i = 0; freqRanges != null && i < freqRanges.length; i++)
                     rangeList.add(freqRanges[i].getMinFrequency() + ":" + freqRanges[i].getMaxFrequency());
             
-                callbackContext.success(TextUtils.join(",", rangeList);
+                callbackContext.success(TextUtils.join(",", rangeList));
             }
         });
     }
