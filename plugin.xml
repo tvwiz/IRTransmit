@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin id="com.example.irtransmit" version="0.0.1" xmlns="http://www.phonegap.com/ns/plugins/1.0">
+<plugin id="com.bhargavakumark.irtransmit" version="0.0.1" xmlns="http://www.phonegap.com/ns/plugins/1.0">
     <name>IR Transmit</name>
     <description>IR Transmit</description>
     <license>MIT</license>
@@ -15,11 +15,11 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="IrTransmit">
-                <param name="android-package" value="com.example.irtransmit.IRTransmit" />
+                <param name="android-package" value="com.bhargavakumark.irtransmit.IRTransmit" />
             </feature>
         </config-file>
 
-        <source-file src="src/android/IRTransmit.java" target-dir="src/bhargavakumark/irtransmit/" />
+        <source-file src="src/android/IRTransmit.java" target-dir="src/com/bhargavakumark/irtransmit/" />
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.TRANSMIT_IR" android:required="false" />
             <uses-feature android:name="android.hardware.consumerir" />
