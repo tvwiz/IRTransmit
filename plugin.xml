@@ -7,14 +7,14 @@
     <keywords>IR,infrared</keywords>
 
 
-    <js-module name="IrTransmit" src="www/irtransmit.js">
+    <js-module name="IRTransmit" src="www/irtransmit.js">
         <clobbers target="window.ir" />
     </js-module>
 
     <!-- android -->
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="IrTransmit">
+            <feature name="IRTransmit">
                 <param name="android-package" value="com.bhargavakumark.irtransmit.IRTransmit" />
             </feature>
         </config-file>
