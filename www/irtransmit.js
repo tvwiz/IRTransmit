@@ -12,11 +12,20 @@ var irtransmit = {
     },
 
     hasIrEmitter: function(successCallback, errorCallback) {
-	console.log("hasIrEmitter: inside");
 	cordova.exec(successCallback,
 	    errorCallback,
 	    "IRTransmit",
 	    "hasIrEmitter",
+	    [{
+	    }]
+	);
+    },
+
+    getCarrierFrequencies: function(successCallback, errorCallback) {
+	cordova.exec(successCallback,
+	    errorCallback,
+	    "IRTransmit",
+	    "getCarrierFrequencies",
 	    [{
 	    }]
 	);

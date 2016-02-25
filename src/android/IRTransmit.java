@@ -1,22 +1,26 @@
 package com.bhargavakumark.irtransmit;
 
-import org.apache.cordova.CordovaPlugin;
+import android.app.Activity;
+
+import android.content.Context;
 
 import android.hardware.ConsumerIrManager;
 
-import org.apache.cordova.CallbackContext;
-import org.json.JSONObject;
-import org.json.JSONArray;
-import org.json.JSONException;
+import android.text.TextUtils;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
-import java.lang.String;
 import java.lang.Exception;
 import java.lang.Integer;
 import java.lang.Runnable;
+import java.lang.String;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class IRTransmit extends CordovaPlugin {
     public static final String ACTION_TRANSMIT = "transmit";
@@ -87,6 +91,27 @@ public class IRTransmit extends CordovaPlugin {
         });
     }
 
+    public void executeGetCarrierFrequencies(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
+        final Context context = this.cordova.getActivity().getApplicationContext();
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                ConsumerIrManager irService = (ConsumerIrManager) context.getSystemService(context.CONSUMER_IR_SERVICE);
+
+                if (android.os.Build.VERSION.SDK_INT < 19) {
+                    callbackContext.error("SDK version does not support IR service");
+                    return;
+                }
+
+                List<String> rangeList = new ArrayList<String>();
+                CarrierFrequencyRange[] freqRanges = irService.getCarrierFrequencies();
+                for (int i = 0; freqRanges != null && i < freqRanges.length; i++)
+                    rangeList.add(freqRanges[i].getMinFrequency() + ":" + freqRanges[i].getMaxFrequency());
+            
+                callbackContext.success(TextUtils.join(",", rangeList);
+            }
+        });
+    }
+
     @Override
     public boolean execute(String action, JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
         if (ACTION_TRANSMIT.equals(action)) {
@@ -94,6 +119,9 @@ public class IRTransmit extends CordovaPlugin {
             return true;
         } else if (ACTION_HASIREMITTER.equals(action)) {
             executeHasIrEmitter(jsonArgs, callbackContext);
+            return true;
+        } else if (ACTION_GETCARRIERFREQUENCIES.equals(action)) {
+            executeGetCarrierFrequencies(jsonArgs, callbackContext);
             return true;
         } else {
             return false; // Returning false results in a "MethodNotFound" error.
