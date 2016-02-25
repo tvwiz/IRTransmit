@@ -15,6 +15,9 @@ import java.lang.Integer;
 import java.lang.Runnable;
 import java.lang.String;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 
