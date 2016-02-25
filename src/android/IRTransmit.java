@@ -23,7 +23,7 @@ public class IRTransmit extends CordovaPlugin {
     public static final String ACTION_HASIREMITTER = "hasIrEmitter";
     public static final String ACTION_GETCARRIERFREQUENCIES = "getCarrierFrequencies";
 
-    public void execute(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
+    public void executeTransmit(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
         try {
             JSONObject args = jsonArgs.getJSONObject(0);
             final Integer frequency = args.getInt("frequency");
@@ -58,10 +58,42 @@ public class IRTransmit extends CordovaPlugin {
         }
     }
 
+    public void executeHasIrEmitter(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
+        final Context context = this.cordova.getActivity().getApplicationContext();
+
+        this.cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                if (android.os.Build.VERSION.SDK_INT < 19) {
+                    Log.d("IRTransmit", "SDK version does not support IR transmit service " + android.os.Build.VERSION.SDK_INT);
+                    callbackContext.success("false");
+                    return;
+                }
+
+                ConsumerIrManager irService = (ConsumerIrManager) context.getSystemService(context.CONSUMER_IR_SERVICE);
+                if (irService == null) {
+                    Log.d("IRTransmit", "CONSUMER_IR_SERVICE not found");
+                    callbackContext.success("false");
+                    return;
+                }
+
+                if (irService.hasIrEmitter()) {
+                    Log.d("IRTransmit", "IR Emitter/Transmitter found");
+                    callbackContext.success("true");
+                } else {
+                    Log.d("IRTransmit", "NO IR Emitter/Transmitter");
+                    callbackContext.success("false");
+                }
+            }
+        });
+    }
+
     @Override
     public boolean execute(String action, JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
-        if (ACTION_TRANSMIT_IR_CODE.equals(action)) {
+        if (ACTION_TRANSMIT.equals(action)) {
             executeTransmit(jsonArgs, callbackContext);
+            return true;
+        } else if (ACTION_HASIREMITTER.equals(action)) {
+            executeHasIrEmitter(jsonArgs, callbackContext);
             return true;
         } else {
             return false; // Returning false results in a "MethodNotFound" error.
