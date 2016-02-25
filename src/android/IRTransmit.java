@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 
 import android.hardware.ConsumerIrManager;
+import android.hardware.ConsumerIrManager.CarrierFrequencyRange;
 
 import android.text.TextUtils;
 
