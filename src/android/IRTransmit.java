@@ -64,7 +64,7 @@ public class IRTransmit extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 if (android.os.Build.VERSION.SDK_INT < 19) {
-                    Log.d("IRTransmit", "SDK version does not support IR transmit service " + android.os.Build.VERSION.SDK_INT);
+                    Log.d("IRTransmit", "SDK version does not support IR transmit service, SDK-version=" + android.os.Build.VERSION.SDK_INT);
                     callbackContext.success("false");
                     return;
                 }
