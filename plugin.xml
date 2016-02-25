@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin id="com.bhargavakumark.irtransmit" version="0.0.1" xmlns="http://www.phonegap.com/ns/plugins/1.0">
-    <name>IR Transmit</name>
+    <name>IRTransmit</name>
     <description>IR Transmit</description>
     <license>MIT</license>
     <keywords>IR,infrared</keywords>
@@ -19,7 +19,7 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/IRTransmit.java" target-dir="src/com/bhargavakumark/irtransmit/" />
+        <source-file src="src/android/IRTransmit.java" target-dir="src/bhargavakumark/irtransmit/" />
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.TRANSMIT_IR" android:required="false" />
             <uses-feature android:name="android.hardware.consumerir" />
