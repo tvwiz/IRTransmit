@@ -22,7 +22,7 @@
         <source-file src="src/android/IRTransmit.java" target-dir="src/bhargavakumark/irtransmit/" />
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.TRANSMIT_IR" android:required="false" />
-            <uses-feature android:name="android.hardware.consumerir" />
+            <uses-feature android:name="android.hardware.consumerir" android:required="false" />
         </config-file>
     </platform>
 </plugin>
