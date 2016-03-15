@@ -33,6 +33,8 @@ public class IRTransmit extends CordovaPlugin {
 
     public void executeTransmit(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
         try {
+            Log.d("IRTransmit", "executeTransmit called");
+
             JSONObject args = jsonArgs.getJSONObject(0);
             final Integer frequency = args.getInt("frequency");
             JSONArray patternJson = args.getJSONArray("pattern");

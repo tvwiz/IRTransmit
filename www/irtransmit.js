@@ -1,12 +1,12 @@
 var irtransmit = {
-    transmit: function(frequency, pattern, successCallback, errorCallback){
+    transmit: function(frequency, pattern, successCallback, errorCallback) {
 	cordova.exec(successCallback,
 	    errorCallback,
 	    "IRTransmit",
 	    "transmit",
 	    [{
 		"frequency": frequency,
-		"patten": pattern
+		"pattern": pattern
 	    }]
 	);
     },
