@@ -1,5 +1,5 @@
 var irtransmit = {
-    transmit: function(frequency, signal,successCallback, errorCallback){
+    transmit: function(frequency, pattern, successCallback, errorCallback){
 	cordova.exec(successCallback,
 	    errorCallback,
 	    "IRTransmit",
