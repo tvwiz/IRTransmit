@@ -33,7 +33,7 @@ public class IRTransmit extends CordovaPlugin {
 
     public void executeTransmit(JSONArray jsonArgs, final CallbackContext callbackContext) throws JSONException {
         try {
-            Log.d("IRTransmit", "executeTransmit called");
+            Log.d("IRTransmit", "executeTransmit called 2");
 
             JSONObject args = jsonArgs.getJSONObject(0);
             final Integer frequency = args.getInt("frequency");
@@ -57,9 +57,9 @@ public class IRTransmit extends CordovaPlugin {
                         }
                         // transmit the pattern at 38.4KHz
                         //irService.transmit(38400, pattern);
-                        irService.transmit(frequency, pattern);
-
                     }
+                    Log.d("IRTransmit", "transmitting at freq " + frequency);
+                    irService.transmit(frequency, pattern);
                     callbackContext.success();
                 }
             });
