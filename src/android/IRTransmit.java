@@ -47,6 +47,7 @@ public class IRTransmit extends CordovaPlugin {
                 public void run() {
                     ConsumerIrManager irService = (ConsumerIrManager) context.getSystemService(context.CONSUMER_IR_SERVICE);
 
+                    /*
                     if (android.os.Build.VERSION.SDK_INT == 19) {
                         int lastIdx = android.os.Build.VERSION.RELEASE.lastIndexOf(".");
                         int VERSION_MR = Integer.valueOf(android.os.Build.VERSION.RELEASE.substring(lastIdx + 1));
@@ -58,6 +59,7 @@ public class IRTransmit extends CordovaPlugin {
                         // transmit the pattern at 38.4KHz
                         //irService.transmit(38400, pattern);
                     }
+                    */
                     Log.d("IRTransmit", "transmitting at freq " + frequency);
                     irService.transmit(frequency, pattern);
                     callbackContext.success();
