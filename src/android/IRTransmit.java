@@ -45,9 +45,14 @@ public class IRTransmit extends CordovaPlugin {
             final Context context = this.cordova.getActivity().getApplicationContext();
             this.cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
+                    if (android.os.Build.VERSION.SDK_INT < 19) {
+                        callbackContext.error("ConsumerIrManager only supported on android API 19 or higher");
+                        return;
+                    }
                     ConsumerIrManager irService = (ConsumerIrManager) context.getSystemService(context.CONSUMER_IR_SERVICE);
 
                     /*
+                    // https://stackoverflow.com/questions/20244337/consumerirmanager-api-19
                     if (android.os.Build.VERSION.SDK_INT == 19) {
                         int lastIdx = android.os.Build.VERSION.RELEASE.lastIndexOf(".");
                         int VERSION_MR = Integer.valueOf(android.os.Build.VERSION.RELEASE.substring(lastIdx + 1));
